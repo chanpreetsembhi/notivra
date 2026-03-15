@@ -181,7 +181,7 @@ onMounted(() => {
   <header class="bg-white border-b border-neutral-200 py-5 px-5 sm:px-5 md:px-8 sticky top-0 z-40">
     <div class="flex items-center justify-between">
       <!-- menu button -->
-      <div class="flex items-center gap-3 lg:hidden order-2 sm:order-0 sm:mr-3">
+      <div class="flex items-center gap-3 lg:hidden order-2 lg:order-0 sm:mr-3">
         <button
           v-if="isAdmin"
           type="button"
@@ -192,7 +192,7 @@ onMounted(() => {
         </button>
 
         <!-- Login/logout Button -->
-        <div>
+        <div class="lg:hidden">
           <button
             v-if="!isAdmin"
             type="button"
@@ -220,13 +220,13 @@ onMounted(() => {
       </div>
       <RouterLink to="/" class="flex items-center gap-2 header-logo">
         <div
-          class="bg-black text-white size-9 text-lg font-extrabold rounded-md grid place-content-center"
+          class="bg-black text-white size-9 text-2xl font-extrabold rounded-md grid place-content-center"
         >
           N
         </div>
-        <div class="font-bold text-lg">Nep</div>
+        <div class="font-extrabold text-2xl">NEP</div>
       </RouterLink>
-      <div class="sm:flex items-center gap-2 ml-auto hidden">
+      <div class="lg:flex items-center gap-2 ml-auto hidden">
         <button
           v-if="isAdmin"
           type="button"
