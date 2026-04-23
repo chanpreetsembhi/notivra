@@ -59,7 +59,7 @@ watch(
         :to="{ name: 'topic-detail', params: { subjectId: route.params.id, topicId: topic._id } }"
         class="bg-white border border-neutral-200 rounded-xl shadow-xs hover:shadow-md transition-shadow hover:text-sky-600 duration-200 text-center p-4"
       >
-        <h3 class="font-medium text-lg">{{ topic.topic }}</h3>
+        <h3 class="font-medium text-lg truncate">{{ topic.topic }}</h3>
       </RouterLink>
     </div>
     <div v-if="topics.length === 0" class="text-center text-gray-500 mt-10">
