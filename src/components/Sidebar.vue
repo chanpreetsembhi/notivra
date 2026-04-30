@@ -197,9 +197,9 @@ const deleteSubject = async () => {
                 </button>
               </nav>
               <a
-                href="https://chanpreetportfolio.vercel.app"
+                href="#"
                 target="_blank"
-                class="flex items-center gap-2 hover:bg-neutral-100 text-neutral-600 border-t border-neutral-200 p-5"
+                class="hidden items-center gap-2 hover:bg-neutral-100 text-neutral-600 border-t border-neutral-200 p-5"
               >
                 <Globe class="size-4" />
                 <p class="text-sm">Visit Website</p>
