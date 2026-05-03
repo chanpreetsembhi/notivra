@@ -186,12 +186,12 @@ onMounted(() => {
           v-if="isAdmin"
           type="button"
           @click="openModel"
-          class="bg-neutral-50 rounded-md flex items-center justify-center p-2 hover:bg-sky-600 hover:text-white cursor-pointer transition ease-in-out duration-200 size-10 ring-1 ring-neutral-200 sm:hidden"
+          class="bg-neutral-50 rounded-md flex items-center justify-center p-2 hover:bg-sky-600 hover:text-white cursor-pointer transition ease-in-out duration-200 size-10 ring-1 ring-neutral-200 lg:hidden"
         >
           <FilePlus2 class="size-7" />
         </button>
 
-        <!-- Login/logout Button -->
+        <!-- Login/logout Button mobile view -->
         <div class="lg:hidden">
           <button
             v-if="!isAdmin"
@@ -205,7 +205,7 @@ onMounted(() => {
             v-else
             type="button"
             @click="handleLogout"
-            class="bg-red-500 hover:bg-red-600 text-white font-medium text-xs rounded-md px-2.5 py-1.5 cursor-pointer"
+            class="bg-red-500 hover:bg-red-600 text-white font-medium text-sm rounded-md px-3 py-2 cursor-pointer"
           >
             Logout
           </button>
@@ -237,7 +237,7 @@ onMounted(() => {
         </button>
         <div class="bg-neutral-100 text-neutral-600 text-xs rounded-md px-2.5 py-1.5">DOCS</div>
         <div class="bg-neutral-100 text-neutral-600 text-xs rounded-md px-2.5 py-1.5">V1.0</div>
-        <!-- Login/logout Button -->
+        <!-- Login/logout Button pc view -->
         <div>
           <button
             v-if="!isAdmin"
