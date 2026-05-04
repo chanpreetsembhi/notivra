@@ -1,29 +1,17 @@
-## Recommended IDE Setup
+# NEP Notes App - Web
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+A simple notes web app where students can easily read and access their study materials anytime, aligned with the National Education Policy 2020. Designed purely for seamless reading to support focused and flexible learning.
 
-## Type Support for `.vue` Imports in TS
+## Tech Stack
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- Vue
+- Typescript
+- Tailwind
+- Headless Ui
+- Axios
+- Lucide Icon
 
-## Customize configuration
+## How to run
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+- Use the command `npm install` to install packages
+- Use the command `npm run dev` to run the project locally
