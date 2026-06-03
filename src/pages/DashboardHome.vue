@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue'
-import Title from '@/components/Title.vue'
+import { BookOpen } from 'lucide-vue-next'
 
 const emit = defineEmits<{
   (e: 'toggle-sidebar'): void
@@ -8,19 +8,22 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center h-full text-center px-5">
-    <Title>Welcome to NEP Support Hub</Title>
-    <p class="text-gray-500 mt-4 max-w-md">
-      Select a subject from the sidebar to explore topics and educational materials.
+  <div class="flex h-full flex-col items-center justify-center px-6 text-center select-none">
+    <div
+      class="mb-6 flex size-16 items-center justify-center rounded-2xl bg-indigo-50 dark:bg-indigo-500/10"
+    >
+      <BookOpen class="size-7 text-indigo-600 dark:text-indigo-400" />
+    </div>
+
+    <h2 class="mb-2 text-lg font-semibold text-slate-800 dark:text-slate-100">
+      Pick a subject to begin
+    </h2>
+    <p class="max-w-xs text-sm leading-relaxed text-slate-400 dark:text-slate-500">
+      Browse subjects from the sidebar and start reading notes, summaries, and key points.
     </p>
-    <div class="mt-8 text-sm text-gray-400">
-      <p>👈 Choose a subject to get started</p>
-      <Button
-        varient="primary"
-        label="Get Started"
-        class="mt-3 block lg:hidden"
-        @click="emit('toggle-sidebar')"
-      />
+
+    <div class="mt-8 lg:hidden">
+      <Button varient="primary" label="Browse Subjects" @click="emit('toggle-sidebar')" />
     </div>
   </div>
 </template>

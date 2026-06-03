@@ -11,6 +11,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'intro',
       component: IntroPage,
     },
     {
@@ -18,8 +19,16 @@ const router = createRouter({
       component: Dashboard,
       children: [
         { path: '', name: 'dashboard-home', component: DashboardHome },
-        { path: 'subjects/:subjectId', name: 'subject-topics', component: Topics },
-        { path: 'subjects/:subjectId/topic/:topicId', name: 'topic-detail', component: DetailPage },
+        {
+          path: 'subjects/:subjectSlug',
+          name: 'subject-topics',
+          component: Topics,
+        },
+        {
+          path: 'subjects/:subjectSlug/topic/:topicSlug',
+          name: 'topic-detail',
+          component: DetailPage,
+        },
       ],
     },
     {

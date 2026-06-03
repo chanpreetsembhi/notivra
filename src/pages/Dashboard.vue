@@ -4,18 +4,15 @@ import Header from '@/components/Header.vue'
 import Sidebar from '@/components/Sidebar.vue'
 
 const open = ref<boolean>(false)
-
-const toggleSidebar = () => {
-  open.value = !open.value
-}
+const toggleSidebar = () => (open.value = !open.value)
 </script>
 
 <template>
-  <div class="flex flex-col h-svh">
+  <div class="flex h-svh flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
     <Header :sidebar-open="open" @toggle-sidebar="toggleSidebar" />
-    <main class="flex overflow-hidden h-full">
+    <main class="flex flex-1 overflow-hidden">
       <Sidebar :open="open" @close="open = false" />
-      <section class="w-full lg:w-4/5 overflow-y-auto p-5 relative">
+      <section class="flex-1 overflow-y-auto bg-white dark:bg-slate-900">
         <RouterView @toggle-sidebar="toggleSidebar" />
       </section>
     </main>

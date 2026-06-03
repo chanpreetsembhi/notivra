@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <style>
-      .cls-1, .cls-2 {
-        stroke-width: 0px;
-      }
-
-      .cls-2 {
-        fill: #fff;
-      }
-    </style>
-  </defs>
-  <rect class="cls-1" y="0" width="32" height="32" rx="6" ry="6"/>
-  <path class="cls-2" d="m24,6.44v19.13h-3.49l-8.32-12.04h-.14v12.04h-4.04V6.44h3.55l8.26,12.03h.17V6.44h4.03Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" width="32" height="32">
+  <!-- Page -->
+  <rect x="6" y="4" width="20" height="24" rx="3" stroke="#4f46e5" stroke-width="2" fill="none"/>
+  <!-- Folded corner -->
+  <path d="M20 4V10H26" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M20 4L26 10" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Bookmark -->
+  <path d="M11 4V14L13.5 12L16 14V4" fill="#818cf8"/>
+  <!-- Text lines -->
+  <line x1="11" y1="19" x2="21" y2="19" stroke="#c7d2fe" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="11" y1="23" x2="17" y2="23" stroke="#c7d2fe" stroke-width="1.5" stroke-linecap="round"/>
 </svg>
