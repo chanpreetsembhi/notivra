@@ -1,23 +1,22 @@
-// src/composables/useAuth.ts
 import { ref, computed } from 'vue'
 
 const isAdmin = ref(false)
 
 export const useAuth = () => {
+  // ✅ Check localStorage on page load
+  const checkAdmin = () => {
+    const adminUser = localStorage.getItem('adminUser')
+    isAdmin.value = adminUser !== null
+  }
+
   const loginAdmin = () => {
     isAdmin.value = true
-    localStorage.setItem('isAdmin', 'true')
   }
 
   const logoutAdmin = () => {
     isAdmin.value = false
-    localStorage.removeItem('isAdmin')
-    localStorage.removeItem('adminToken')
-  }
-
-  const checkAdmin = () => {
-    const admin = localStorage.getItem('isAdmin')
-    isAdmin.value = admin === 'true'
+    // ✅ Only remove adminUser, no token
+    localStorage.removeItem('adminUser')
   }
 
   return {

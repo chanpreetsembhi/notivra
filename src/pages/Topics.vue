@@ -8,6 +8,8 @@ import { BookOpen } from 'lucide-vue-next'
 import Title from '@/components/Title.vue'
 import { slugify } from '@/utils/slug'
 
+const API = 'https://notivra-backend.vercel.app/api'
+
 const route = useRoute()
 const topics = ref<Topic[]>([])
 const subjectName = ref<string>('')
@@ -22,7 +24,7 @@ const fetchTopics = async () => {
 
     subjectId.value = id
 
-    const { data } = await axios.get(`https://nep-backend.vercel.app/api/subjects/${id}/topics`)
+    const { data } = await axios.get(`${API}/subjects/${id}/topics`)
     topics.value = data.topics || []
     subjectName.value = data.subject || ''
   } catch (error) {

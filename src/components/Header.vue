@@ -12,10 +12,13 @@ import type { Subject } from '@/types/subject'
 import { useAuth } from '@/composables/useAuth'
 import Logo from '@/assets/logo.svg'
 
+const API = 'https://notivra-backend.vercel.app/api'
+
 defineProps<{ sidebarOpen: boolean }>()
 const emit = defineEmits<{ (e: 'toggle-sidebar'): void }>()
 
-const { isAdmin, checkAdmin, logoutAdmin } = useAuth()
+// ✅ Add loginAdmin
+const { isAdmin, checkAdmin, logoutAdmin, loginAdmin } = useAuth()
 
 const isOpen = ref(false)
 const subjects = ref<Subject[]>([])
@@ -49,12 +52,13 @@ const submitTopic = async () => {
 
   try {
     const subjectId = subjects.value.find((s) => s.subject === selectedSubject.value.subject)?._id
+
     if (!subjectId) {
       error.value = 'Invalid subject'
       return
     }
 
-    await axios.post(`https://nep-backend.vercel.app/api/subjects/${subjectId}/topics`, {
+    await axios.post(`${API}/subjects/${subjectId}/topics`, {
       topic: title.value,
       url: url.value,
       category: selectedSubject.value.subject,
@@ -80,6 +84,7 @@ const openLoginModel = () => {
   username.value = ''
   password.value = ''
 }
+
 const closeLoginModel = () => {
   loginModel.value = false
   loginError.value = null
@@ -87,28 +92,37 @@ const closeLoginModel = () => {
   password.value = ''
 }
 
+// Handle Login
 const handleLogin = async () => {
   if (!username.value.trim() || !password.value.trim()) {
     loginError.value = 'Username and password are required'
     return
   }
+
   isLoggingIn.value = true
   loginError.value = null
+
   try {
-    const { data } = await axios.post('https://nep-backend.vercel.app/api/admin/login', {
+    const { data } = await axios.post(`${API}/admin/login`, {
       username: username.value,
       password: password.value,
     })
+
+    console.log('✅ Login response:', data)
+
     if (data.success) {
-      localStorage.setItem('isAdmin', 'true')
-      localStorage.setItem('adminUser', JSON.stringify(data.user))
-      checkAdmin()
+      loginAdmin() // ✅ sets isAdmin = true in composable
+
+      // ✅ Save admin info to localStorage (no token)
+      localStorage.setItem('adminUser', JSON.stringify(data.data))
+
       closeLoginModel()
       toast.success('Login successful!', { autoClose: 1000 })
       setTimeout(() => window.location.reload(), 1000)
     }
-  } catch {
-    loginError.value = 'Invalid credentials'
+  } catch (err: any) {
+    console.log('❌ Login error:', err?.response?.data)
+    loginError.value = err?.response?.data?.message || 'Invalid credentials'
     toast.error('Login failed')
   } finally {
     isLoggingIn.value = false
@@ -116,22 +130,23 @@ const handleLogin = async () => {
 }
 
 const handleLogout = () => {
-  logoutAdmin()
+  logoutAdmin() // ✅ this sets isAdmin = false
   toast.success('Logged out', { autoClose: 1000 })
   setTimeout(() => window.location.reload(), 1000)
 }
 
 const fetchSubjects = async () => {
   try {
-    const { data } = await axios.get('https://nep-backend.vercel.app/api/subjects')
-    subjects.value = data.subjects
+    const { data } = await axios.get(`${API}/subjects`)
+    subjects.value = Array.isArray(data.subjects) ? data.subjects : []
   } catch {
     console.error('Failed to fetch subjects')
+    subjects.value = []
   }
 }
 
 onMounted(() => {
-  checkAdmin()
+  checkAdmin() // ✅ restore login state on page load
   fetchSubjects()
 })
 </script>

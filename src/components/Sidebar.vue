@@ -13,6 +13,8 @@ import { useAuth } from '@/composables/useAuth'
 import { VueSpinnerTail } from 'vue3-spinners'
 import { slugify } from '@/utils/slug'
 
+const API = 'https://notivra-backend.vercel.app/api'
+
 defineProps<{ open: boolean }>()
 const emit = defineEmits<{ (e: 'close'): void }>()
 
@@ -24,8 +26,8 @@ const isLoading = ref(false)
 onMounted(async () => {
   isLoading.value = true
   try {
-    const { data } = await axios.get('https://nep-backend.vercel.app/api/subjects')
-    subjects.value = data.subjects
+    const { data } = await axios.get(`${API}/subjects`)
+    subjects.value = Array.isArray(data.subjects) ? data.subjects : []
   } catch (error) {
     console.error('Failed to fetch:', error)
   } finally {
@@ -55,12 +57,12 @@ const submitSubject = async () => {
   }
   try {
     if (isEditMode.value && editingSubjectId.value) {
-      await axios.put(`https://nep-backend.vercel.app/api/subjects/${editingSubjectId.value}`, {
+      await axios.put(`http://localhost:8000/api/subjects/${editingSubjectId.value}`, {
         subject: subjectName.value,
       })
       toast.success('Subject updated', { autoClose: 1000 })
     } else {
-      await axios.post('https://nep-backend.vercel.app/api/subjects', {
+      await axios.post('http://localhost:8000/api/subjects', {
         subject: subjectName.value,
       })
       toast.success('Subject added', { autoClose: 1000 })
@@ -101,7 +103,7 @@ const openDeleteModel = (id: string, event: Event) => {
 const deleteSubject = async () => {
   if (!deletingSubjectId.value) return
   try {
-    await axios.delete(`https://nep-backend.vercel.app/api/subjects/${deletingSubjectId.value}`)
+    await axios.delete(`http://localhost:8000/api/subjects/${deletingSubjectId.value}`)
     subjects.value = subjects.value.filter((s) => s._id !== deletingSubjectId.value)
     toast.success('Subject deleted', { autoClose: 1000 })
     closeDeleteModel()

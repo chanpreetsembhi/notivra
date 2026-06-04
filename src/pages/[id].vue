@@ -11,9 +11,10 @@ import InputField from '@/components/InputField.vue'
 import Button from '@/components/Button.vue'
 import { toast } from 'vue3-toastify'
 import { useAuth } from '@/composables/useAuth'
-import { slugify } from '@/utils/slug'
 
 const { isAdmin } = useAuth()
+
+const API = 'https://notivra-backend.vercel.app/api'
 
 const route = useRoute()
 const router = useRouter()
@@ -50,9 +51,7 @@ onMounted(async () => {
 
     if (!subjectId.value || !topicId.value) return
 
-    const response = await axios.get(
-      `https://nep-backend.vercel.app/api/subjects/${subjectId.value}/topic/${topicId.value}`,
-    )
+    const response = await axios.get(`${API}/subjects/${subjectId.value}/topics/${topicId.value}`)
 
     topicName.value = response.data.topic || null
   } catch {
@@ -77,10 +76,10 @@ const editDoc = async () => {
   }
 
   try {
-    await axios.put(
-      `https://nep-backend.vercel.app/api/subjects/${subjectId.value}/topic/${topicId.value}`,
-      { topic: title.value, url: url.value },
-    )
+    await axios.put(`${API}/subjects/${subjectId.value}/topics/${topicId.value}`, {
+      topic: title.value,
+      url: url.value,
+    })
 
     closeEditModel()
     toast.success('Updated successfully', { autoClose: 1000 })
@@ -88,7 +87,7 @@ const editDoc = async () => {
     setTimeout(async () => {
       try {
         const response = await axios.get(
-          `https://nep-backend.vercel.app/api/subjects/${subjectId.value}/topic/${topicId.value}`,
+          `${API}/subjects/${subjectId.value}/topic/${topicId.value}`,
         )
         topicName.value = response.data.topic || null
       } catch {
@@ -102,9 +101,7 @@ const editDoc = async () => {
 
 const deleteDoc = async () => {
   try {
-    await axios.delete(
-      `https://nep-backend.vercel.app/api/subjects/${subjectId.value}/topic/${topicId.value}`,
-    )
+    await axios.delete(`${API}/subjects/${subjectId.value}/topics/${topicId.value}`)
     toast.success('Document deleted successfully', { autoClose: 1000 })
     setTimeout(() => {
       router.push({
