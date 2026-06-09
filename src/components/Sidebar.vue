@@ -62,7 +62,7 @@ const submitSubject = async () => {
       })
       toast.success('Subject updated', { autoClose: 1000 })
     } else {
-      await axios.post('${API}/subjects', {
+      await axios.post(`${API}/subjects`, {
         subject: subjectName.value,
       })
       toast.success('Subject added', { autoClose: 1000 })
